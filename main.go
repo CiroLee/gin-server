@@ -1,13 +1,14 @@
 package main
 
-import "github.com/gin-gonic/gin"
+import "log"
+
+const PORT = ":7788"
 
 func main() {
-	router := gin.Default()
-	router.GET("/hello", func(c *gin.Context) {
-		c.JSON(200, gin.H{
-			"data": "hello 世界",
-		})
-	})
-	router.Run()
+	router := SetUpRouter()
+
+	err := router.Run(PORT)
+	if err != nil {
+		log.Fatal("server is running")
+	}
 }
