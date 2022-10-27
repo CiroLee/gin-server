@@ -1,1 +1,1 @@
-# go-gin-web-demo
+# gin-server
