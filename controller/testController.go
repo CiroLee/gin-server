@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/CiroLee/go-web-gin/constants/codes"
+	"github.com/CiroLee/go-server/constants/codes"
 	"github.com/gin-gonic/gin"
 )
 
@@ -13,10 +13,10 @@ type TestReq struct {
 	Gender string `form:"gender" binding:"oneof=male female"`
 }
 
-func TestController(c *gin.Context) {
+func TestController(ctx *gin.Context) {
 	var q TestReq
-	if err := c.ShouldBindQuery(&q); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{
+	if err := ctx.ShouldBindQuery(&q); err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{
 			"code": codes.ErrorCode["missParams"].Code,
 			"msg":  codes.ErrorCode["missParams"].Msg,
 			"data": err.Error(),
@@ -24,15 +24,15 @@ func TestController(c *gin.Context) {
 		return
 	}
 	var helloGender string
-	if c.Query("gender") == "male" {
+	if ctx.Query("gender") == "male" {
 		helloGender = "Mr."
 	} else {
 		helloGender = "Miss."
 	}
-	c.JSON(http.StatusOK, gin.H{
+	ctx.JSON(http.StatusOK, gin.H{
 		"code": 0,
 		"msg":  "success",
-		"data": fmt.Sprintf("Hello, %s %s", helloGender, c.Query("name")),
+		"data": fmt.Sprintf("Hello, %s %s", helloGender, ctx.Query("name")),
 	})
 
 }

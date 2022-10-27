@@ -11,4 +11,8 @@ var ErrorCode = map[string]ResResponse{
 		Code: -1000,
 		Msg:  "missing params",
 	},
+	"invalidParams": {
+		Code: -1001,
+		Msg:  "invalid params",
+	},
 }

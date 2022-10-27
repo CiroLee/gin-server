@@ -1,4 +1,4 @@
-module github.com/CiroLee/go-web-gin
+module github.com/CiroLee/go-server
 
 go 1.19
 
