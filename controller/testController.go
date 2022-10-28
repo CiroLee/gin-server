@@ -17,8 +17,8 @@ func TestController(ctx *gin.Context) {
 	var q TestReq
 	if err := ctx.ShouldBindQuery(&q); err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{
-			"code": codes.ErrorCode["missParams"].Code,
-			"msg":  codes.ErrorCode["missParams"].Msg,
+			"code": codes.ErrorCode["invalidParams"].Code,
+			"msg":  codes.ErrorCode["invalidParams"].Msg,
 			"data": err.Error(),
 		})
 		return
