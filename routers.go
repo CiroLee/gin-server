@@ -10,5 +10,6 @@ func SetUpRouter() *gin.Engine {
 
 	r.GET("/test", controller.TestController)
 	r.GET("/mock/number", controller.MockNumberController)
+	r.GET("/mock/texts", controller.MockTextsController)
 	return r
 }

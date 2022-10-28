@@ -9,9 +9,8 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// 生成随机数字 包括: 整数，浮点数
-func MockNumberController(ctx *gin.Context) {
-	var q structs.NumberReq
+func MockTextsController(ctx *gin.Context) {
+	var q structs.TextsReq
 	if err := ctx.ShouldBindQuery(&q); err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{
 			"code": codes.ErrorCode["invalidParams"].Code,
@@ -21,20 +20,13 @@ func MockNumberController(ctx *gin.Context) {
 		return
 	}
 
-	mockNumberService := service.MockNumberService{NumberReq: q}
-	r, err := mockNumberService.NumGenerate()
+	mockTextsservice := service.MockTextsService{TextsReq: q}
+	r := mockTextsservice.TextGenerate()
 
-	if err != nil {
-		ctx.JSON(http.StatusBadRequest, gin.H{
-			"code": codes.ErrorCode["invalidParams"].Code,
-			"msg":  codes.ErrorCode["invalidParams"].Msg,
-			"data": err.Error(),
-		})
-		return
-	}
 	ctx.JSON(http.StatusOK, gin.H{
 		"code": 0,
 		"msg":  "success",
 		"data": r,
 	})
+
 }

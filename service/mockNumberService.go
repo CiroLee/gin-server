@@ -9,7 +9,7 @@ type MockNumberService struct {
 	structs.NumberReq
 }
 
-func (s *MockNumberService) Generate() (any, error) {
+func (s *MockNumberService) NumGenerate() (any, error) {
 	switch s.Type {
 	case "int":
 		return utils.RandomInterger(s.Min, s.Max)
