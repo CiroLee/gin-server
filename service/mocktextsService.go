@@ -1,14 +1,23 @@
 package service
 
 import (
+	"strings"
+
 	"github.com/CiroLee/go-server/constants"
 	"github.com/CiroLee/go-server/utils"
 
 	"github.com/CiroLee/go-server/structs"
 )
 
+const baseNum = 10
+
 var zhChars = constants.ZH_CHARACTERS
 var alphabet = constants.ALPHABET
+
+type baseProps struct {
+	Min, Max, Len int
+	Upper         bool
+}
 
 // service类
 type MockTextsService struct {
@@ -29,31 +38,76 @@ func (t *MockTextsService) letter() string {
 	return source[index]
 }
 
-func (t *MockTextsService) Word() string {
+func (t *MockTextsService) word(p baseProps) string {
 	var str string
-	length := 1
-	if t.Len > 0 {
-		length = t.Len
+	len := 1
+	if p.Len > 0 {
+		len = p.Len
 	} else {
-		n, err := utils.RandomInterger(t.Min, t.Max)
-		if err != nil {
-			length = n
+		n, err := utils.RandomInterger(p.Min, p.Max)
+		if err == nil {
+			len = n
 		}
 	}
-
-	for i := 0; i < length; i++ {
+	for i := 0; i < len; i++ {
 		str += t.letter()
 	}
 
+	if p.Upper {
+		return utils.Capitalize(str)
+	}
 	return str
+}
+
+func (t *MockTextsService) sentence(p baseProps) string {
+	var str string
+	len := 1
+	if p.Len > 0 {
+		len = p.Len
+	} else {
+		n, err := utils.RandomInterger(p.Min, p.Max)
+		if err == nil {
+			len = n
+		}
+	}
+	trailCode := "，"
+	if t.Language == "en" {
+		trailCode = " "
+	}
+	for i := 0; i < len; i++ {
+		str += t.word(baseProps{
+			Min: 1,
+			Max: baseNum,
+		}) + trailCode
+	}
+
+	if p.Upper {
+		return utils.Capitalize(strings.TrimRight(str, trailCode))
+	}
+	return strings.TrimRight(str, trailCode)
 }
 
 // 对外方法
 
 func (t *MockTextsService) TextGenerate() string {
 
-	if t.Type == "word" {
-		return t.Word()
+	switch t.Type {
+	case "word":
+		return t.word(baseProps{
+			Min:   t.Min,
+			Max:   t.Max,
+			Len:   t.Len,
+			Upper: t.Upper,
+		})
+	case "sentence":
+		return t.sentence(baseProps{
+			Min:   t.Min,
+			Max:   t.Max,
+			Len:   t.Len,
+			Upper: t.Upper,
+		})
+	default:
+		return ""
 	}
-	return ""
+
 }

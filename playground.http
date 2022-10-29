@@ -1,0 +1,5 @@
+# word
+GET http://127.0.0.1:7788/mock/texts?type=word&min=1&max=-10 HTTP/1.1
+###
+# sentence
+GET http://127.0.0.1:7788/mock/texts?type=sentence&min=1&max=10&lang=cn&len=2&upper=true HTTP/1.1
