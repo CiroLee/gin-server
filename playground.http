@@ -1,5 +1,14 @@
 # word
-GET http://127.0.0.1:7788/mock/texts?type=word&min=1&max=-10 HTTP/1.1
+GET http://127.0.0.1:7788/mock/texts?type=word&min=1&max=10&num=10 HTTP/1.1
 ###
 # sentence
 GET http://127.0.0.1:7788/mock/texts?type=sentence&min=1&max=10&lang=cn&len=2&upper=true HTTP/1.1
+###
+# paragraph
+GET http://127.0.0.1:7788/mock/texts?type=paragraph&len=4&lang=cn&len=2&upper=true HTTP/1.1
+###
+# name
+GET http://127.0.0.1:7788/mock/texts?type=name&len=4&lang=en&upper=true&num=12 HTTP/1.1
+###
+# string
+GET http://127.0.0.1:7788/mock/texts?type=string&len=4&num=12 HTTP/1.1

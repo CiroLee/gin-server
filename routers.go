@@ -9,7 +9,10 @@ func SetUpRouter() *gin.Engine {
 	r := gin.Default()
 
 	r.GET("/test", controller.TestController)
-	r.GET("/mock/number", controller.MockNumberController)
-	r.GET("/mock/texts", controller.MockTextsController)
+	mock := r.Group("/mock")
+	{
+		mock.GET("/number", controller.MockNumberController)
+		mock.GET("/texts", controller.MockTextsController)
+	}
 	return r
 }

@@ -12,4 +12,26 @@ this repo build a server for simple mock API
 
 
 request in vscode     
-plugin rest client
+plugin: [REST Client](https://marketplace.visualstudio.com/items?itemName=humao.rest-client)     
+
+## develop      
+go version 1.19 
+
+```shell
+# first: install air
+go install github.com/cosmtrek/air@latest
+# second: add air to env e.g. alias in .zshrc
+
+# .zshrc
+...
+alias air='$(go env GOPATH)/bin/air'
+...
+
+```
+
+## debug      
+in the root directory, run:      
+```shell
+air
+```
+

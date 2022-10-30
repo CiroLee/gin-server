@@ -21,12 +21,27 @@ func MockTextsController(ctx *gin.Context) {
 	}
 
 	mockTextsservice := service.MockTextsService{TextsReq: q}
-	r := mockTextsservice.TextGenerate()
-
-	ctx.JSON(http.StatusOK, gin.H{
-		"code": 0,
-		"msg":  "success",
-		"data": r,
-	})
+	if q.Num > 1 {
+		var r []string
+		num := q.Num
+		if q.Num > 100 {
+			num = 100
+		}
+		for i := 0; i < num; i++ {
+			r = append(r, mockTextsservice.TextGenerate())
+		}
+		ctx.JSON(http.StatusOK, gin.H{
+			"code": 0,
+			"msg":  "success",
+			"data": r,
+		})
+	} else {
+		r := mockTextsservice.TextGenerate()
+		ctx.JSON(http.StatusOK, gin.H{
+			"code": 0,
+			"msg":  "success",
+			"data": r,
+		})
+	}
 
 }

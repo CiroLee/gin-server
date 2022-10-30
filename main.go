@@ -9,6 +9,9 @@ func main() {
 
 	err := router.Run(PORT)
 	if err != nil {
+		log.Fatal("server start ERROR", err)
+	} else {
 		log.Fatal("server is running")
 	}
+
 }
