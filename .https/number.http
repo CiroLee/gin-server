@@ -1,0 +1,8 @@
+# int
+GET http://127.0.0.1:7788/mock/number?type=int&min=10&max=100 HTTP/1.1
+###
+#float
+GET http://127.0.0.1:7788/mock/number?type=float&min=10&max=100&num=10&demical=2 HTTP/1.1
+###
+
+GET http://127.0.0.1:8082/api/mock/number HTTP/1.1

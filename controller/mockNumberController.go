@@ -1,9 +1,7 @@
 package controller
 
 import (
-	"net/http"
-
-	"github.com/CiroLee/go-server/constants/codes"
+	httphelper "github.com/CiroLee/go-server/http-helper"
 	"github.com/CiroLee/go-server/service"
 	"github.com/CiroLee/go-server/structs"
 	"github.com/gin-gonic/gin"
@@ -13,28 +11,26 @@ import (
 func MockNumberController(ctx *gin.Context) {
 	var q structs.NumberReq
 	if err := ctx.ShouldBindQuery(&q); err != nil {
-		ctx.JSON(http.StatusBadRequest, gin.H{
-			"code": codes.ErrorCode["invalidParams"].Code,
-			"msg":  codes.ErrorCode["invalidParams"].Msg,
-			"data": err.Error(),
-		})
+		httphelper.InvalidParamsRes(ctx, err)
 		return
 	}
 
-	mockNumberService := service.MockNumberService{NumberReq: q}
-	r, err := mockNumberService.NumGenerate()
+	mockNumberService := service.MockNumberService{NumberReq: q, Ctx: ctx}
 
-	if err != nil {
-		ctx.JSON(http.StatusBadRequest, gin.H{
-			"code": codes.ErrorCode["invalidParams"].Code,
-			"msg":  codes.ErrorCode["invalidParams"].Msg,
-			"data": err.Error(),
-		})
-		return
+	if q.Num > 1 {
+		var r []any
+		num := q.Num
+		if q.Num > 100 {
+			num = 100
+		}
+
+		for i := 0; i < num; i++ {
+			r = append(r, mockNumberService.NumGenerate())
+		}
+
+		httphelper.SuccessRes(ctx, r)
+	} else {
+		httphelper.SuccessRes(ctx, mockNumberService.NumGenerate())
 	}
-	ctx.JSON(http.StatusOK, gin.H{
-		"code": 0,
-		"msg":  "success",
-		"data": r,
-	})
+
 }
