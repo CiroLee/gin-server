@@ -2,7 +2,7 @@ package main
 
 import "log"
 
-const PORT = ":8080"
+const PORT = ":7788"
 
 func main() {
 	router := SetUpRouter()
