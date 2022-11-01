@@ -18,8 +18,10 @@ type TextsReq struct {
 }
 
 type DateReq struct {
-	Type string `form:"type" binding:"oneof=date timestamp weekday"`
-	From int    `form:"from" binding:"omitempty,gte=0"`
-	To   int    `form:"to" binding:"omitempty,gtefield=From"`
-	Num  int    `form:"num" binding:"omitempty,gte=1"`
+	Type     string `form:"type" binding:"oneof=date timestamp weekday month"`
+	From     int    `form:"from" binding:"omitempty,gte=0"`
+	To       int    `form:"to" binding:"omitempty,gtefield=From"`
+	Abbr     bool   `form:"abbr" binding:"omitempty"`
+	Language string `form:"lang" binding:"omitempty,oneof=cn en"`
+	Num      int    `form:"num" binding:"omitempty,gte=1"`
 }

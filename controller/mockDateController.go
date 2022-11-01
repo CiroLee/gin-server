@@ -37,7 +37,8 @@ func MockDateController(ctx *gin.Context) {
 			r = append(r, date)
 		}
 		httphelper.SuccessRes(ctx, r)
+	} else {
+		httphelper.SuccessRes(ctx, mockDateService.DateGenerate())
 	}
-	httphelper.SuccessRes(ctx, mockDateService.DateGenerate())
 
 }

@@ -11,7 +11,7 @@ import (
 func MockNumberController(ctx *gin.Context) {
 	var q structs.NumberReq
 	if err := ctx.ShouldBindQuery(&q); err != nil {
-		httphelper.InvalidParamsRes(ctx, err)
+		httphelper.RequestError(ctx, err)
 		return
 	}
 

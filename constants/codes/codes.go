@@ -7,8 +7,8 @@ type ResResponse struct {
 }
 
 var ErrorCode = map[string]ResResponse{
-	"invalidParams": {
+	"RequestError": {
 		Code: -1000,
-		Msg:  "invalid params",
+		Msg:  "request error",
 	},
 }

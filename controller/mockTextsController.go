@@ -10,7 +10,7 @@ import (
 func MockTextsController(ctx *gin.Context) {
 	var q structs.TextsReq
 	if err := ctx.ShouldBindQuery(&q); err != nil {
-		httphelper.InvalidParamsRes(ctx, err)
+		httphelper.RequestError(ctx, err)
 		return
 	}
 

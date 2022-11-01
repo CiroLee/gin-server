@@ -1,3 +1,11 @@
 # date
-
-GET http://127.0.0.1:7788/mock/date?type=date&from=945014399&to=1670860799 HTTP/1.1
+GET http://127.0.0.1:7788/mock/date?type=date&from=945014399&to=1670860799&num=3 HTTP/1.1
+###
+#timestamp
+GET http://127.0.0.1:7788/mock/date?type=timestamp&from=945014399&to=1670860799&num=4 HTTP/1.1
+###
+#weekday
+GET http://127.0.0.1:7788/mock/date?type=weekday&lang=en&abbr=true HTTP/1.1
+###
+#month
+GET http://127.0.0.1:7788/mock/date?type=month&lang=en&abbr=true HTTP/1.1

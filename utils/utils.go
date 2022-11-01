@@ -16,3 +16,8 @@ func Capitalize(s string) string {
 
 	return string(r)
 }
+
+func RandomELement[T any](slice []T) T {
+	index, _ := RandomInterger(0, len(slice))
+	return slice[index]
+}

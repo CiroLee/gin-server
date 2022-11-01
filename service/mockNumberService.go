@@ -17,14 +17,14 @@ func (s *MockNumberService) NumGenerate() any {
 	case "int":
 		r, err := utils.RandomInterger(s.Min, s.Max)
 		if err != nil {
-			httphelper.InvalidParamsRes(s.Ctx, err)
+			httphelper.RequestError(s.Ctx, err)
 		}
 		return r
 
 	default:
 		r, err := utils.RandomFloat(s.Min, s.Max, s.Demical)
 		if err != nil {
-			httphelper.InvalidParamsRes(s.Ctx, err)
+			httphelper.RequestError(s.Ctx, err)
 		}
 		return r
 	}

@@ -7,10 +7,10 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func InvalidParamsRes(ctx *gin.Context, err error) {
+func RequestError(ctx *gin.Context, err error) {
 	ctx.JSON(http.StatusBadRequest, gin.H{
-		"code": codes.ErrorCode["invalidParams"].Code,
-		"msg":  codes.ErrorCode["invalidParams"].Msg,
+		"code": codes.ErrorCode["RequestError"].Code,
+		"msg":  codes.ErrorCode["RequestError"].Msg,
 		"data": err.Error(),
 	})
 }
