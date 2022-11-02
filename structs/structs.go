@@ -25,3 +25,20 @@ type DateReq struct {
 	Language string `form:"lang" binding:"omitempty,oneof=cn en"`
 	Num      int    `form:"num" binding:"omitempty,gte=1"`
 }
+
+type ImageReq struct {
+	Type      string `form:"type" binding:"oneof=placeholder picsum"`
+	Width     int    `form:"width" binding:"omitempty,gt=0"`
+	Height    int    `form:"width" binding:"omitempty,gt=0"`
+	BgColor   string `form:"bgcolor" binding:"omitempty"`
+	FontColor string `form:"fontcolor" binding:"omitempty"`
+	Text      string `form:"text" binding:"omitempty"`
+	Grayscale bool   `form:"grayscale" binding:"omitempty"`
+	Blur      int    `form:"blur" binding:"omitempty, gte=1,lte=10"`
+	Num       int    `form:"num" binding:"omitempty,gte=1"`
+}
+
+type ColorReq struct {
+	Type string `form:"type" binding:"oneof=hex rgb rgba hsl hsla"`
+	Num  int    `form:"num" binding:"omitempty,gte=1"`
+}

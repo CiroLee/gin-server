@@ -1,0 +1,11 @@
+# hex
+GET http://127.0.0.1:7788/mock/color?type=hex&num=3 HTTP/1.1
+###
+# rgb
+GET http://127.0.0.1:7788/mock/color?type=rgb&num=3 HTTP/1.1
+###
+#rgba
+GET http://127.0.0.1:7788/mock/color?type=rgba&num=3 HTTP/1.1
+###
+# hsl
+GET http://127.0.0.1:7788/mock/color?type=hsl&num=1 HTTP/1.1

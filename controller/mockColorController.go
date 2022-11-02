@@ -7,18 +7,17 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func MockDateController(ctx *gin.Context) {
-	var q structs.DateReq
+func MockColorController(ctx *gin.Context) {
+	var q structs.ColorReq
 	if err := ctx.ShouldBindQuery(&q); err != nil {
 		httphelper.RequestError(ctx, err)
 		return
 	}
 
-	mockDateService := service.MockDateService{
-		DateReq: q,
-		Ctx:     ctx,
+	mockColorService := service.MockColorService{
+		ColorReq: q,
+		Ctx:      ctx,
 	}
-
 	if q.Num > 1 {
 		var r []string
 		num := q.Num
@@ -26,12 +25,11 @@ func MockDateController(ctx *gin.Context) {
 			num = 100
 		}
 		for i := 0; i < num; i++ {
-			date := mockDateService.DateGenerate()
-			r = append(r, date)
+			colors := mockColorService.ColorGenerate()
+			r = append(r, colors)
 		}
 		httphelper.SuccessRes(ctx, r)
 	} else {
-		httphelper.SuccessRes(ctx, mockDateService.DateGenerate())
+		httphelper.SuccessRes(ctx, mockColorService.ColorGenerate())
 	}
-
 }
