@@ -1,0 +1,8 @@
+# placeholder
+GET http://127.0.0.1:7788/mock/image?type=placeholder&text=123 HTTP/1.1
+###
+#placeholder
+GET http://127.0.0.1:7788/mock/image?type=placeholder&width=200&bgcolor=eee&fontcolor=000&text=123 HTTP/1.1
+###
+#picsum
+GET http://127.0.0.1:7788/mock/image?type=picsum&grayscale=true&blur=2 HTTP/1.1

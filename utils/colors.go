@@ -8,11 +8,11 @@ import (
 	"strings"
 )
 
-func HexToRgb(hex string) []uint {
+func HexToRgb(hex string) ([]uint, error) {
 	var hexReg = regexp.MustCompile("^([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$")
 	hexLower := strings.ToLower(hex)
 	if !hexReg.MatchString(hexLower) {
-		panic(fmt.Sprintf("hexToRgb: invalid hex color %v", hex))
+		return nil, fmt.Errorf("hexToRgb: invalid hex color %v", hex)
 	}
 	if len(hexLower) == 3 {
 		hexLower += hexLower
@@ -28,7 +28,7 @@ func HexToRgb(hex string) []uint {
 		rgb = append(rgb, uint(c1))
 	}
 
-	return rgb
+	return rgb, nil
 }
 
 func RgbToHsl(rgb []float64) []uint {
@@ -38,9 +38,6 @@ func RgbToHsl(rgb []float64) []uint {
 	max := Max([]float64{r, g, b})
 	min := Min([]float64{r, g, b})
 	mid := (max + min) / 2
-
-	fmt.Printf("r: %v\n", r)
-	fmt.Printf("max: %v\n", rgb[0]/255)
 
 	var s float64
 	h, l := mid, mid

@@ -6,12 +6,10 @@ import (
 
 	"github.com/CiroLee/go-server/structs"
 	"github.com/CiroLee/go-server/utils"
-	"github.com/gin-gonic/gin"
 )
 
 type MockColorService struct {
 	structs.ColorReq
-	Ctx *gin.Context
 }
 
 func generateColorSlice(range1, range2, range3 [2]int) [3]int {
@@ -45,10 +43,15 @@ func (c *MockColorService) rgba() string {
 
 func (c *MockColorService) hsl() string {
 	s := generateColorSlice([2]int{0, 101}, [2]int{0, 361}, [2]int{0, 101})
-	fmt.Printf("s: %v\n", s)
 	return fmt.Sprintf("hsl(%v, %v%%, %v%%)", s[0], s[1], s[2])
 }
+func (c *MockColorService) hsla() string {
+	s := generateColorSlice([2]int{0, 101}, [2]int{0, 361}, [2]int{0, 101})
+	alpha, _ := utils.RandomFloat(0, 1, 2)
 
+	return fmt.Sprintf("hsl(%v, %v%%, %v%%, %v)", s[0], s[1], s[2], alpha)
+
+}
 func (c *MockColorService) ColorGenerate() string {
 	switch c.Type {
 	case "hex":
@@ -59,6 +62,8 @@ func (c *MockColorService) ColorGenerate() string {
 		return c.rgba()
 	case "hsl":
 		return c.hsl()
+	case "hsla":
+		return c.hsla()
 	default:
 		return ""
 	}

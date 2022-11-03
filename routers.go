@@ -15,6 +15,7 @@ func SetUpRouter() *gin.Engine {
 		mock.GET("/texts", controller.MockTextsController)
 		mock.GET("/date", controller.MockDateController)
 		mock.GET("/color", controller.MockColorController)
+		mock.GET("/image", controller.MockImageController)
 	}
 	return r
 }
